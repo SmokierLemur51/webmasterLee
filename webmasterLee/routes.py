@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect, request
-from webmasterLee import app, db, bcypt
+from webmasterLee import app, db, bcrypt
 
 # from webmasterLee.forms import __forms__
 # from webmasterLee.models import __models__
@@ -43,11 +43,7 @@ def payment():
 
 
 
-'''
-	*** LANSING EFFICIENCY TRACKING ***
-		- for keeping track of orders that I placed
 
-'''
 
 
 
