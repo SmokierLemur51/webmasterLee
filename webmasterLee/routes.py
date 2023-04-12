@@ -25,6 +25,31 @@ def index():
 	return render_template("index.html", title="Homepage")
 
 
+def about():
+	return render_template("about.html", title="About")
+
+
+def contact():
+	return render_template("contact.html", title="Contact")
+
+
+def login():
+	return render_template("login.html", title="Login")
+
+
+# @login_required
+def payment():
+	return render_template("payment.html", title="Payment")
+
+
+
+'''
+	*** LANSING EFFICIENCY TRACKING ***
+		- for keeping track of orders that I placed
+
+'''
+
+
 
 # from webmasterLeeAdministration import __administrator__
 
@@ -33,3 +58,5 @@ def index():
 		- separate package or contain within?
 
 '''
+
+
