@@ -7,12 +7,6 @@ from webmasterLee import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 
 
-''' 
-	PERSONAL FINANCES SECTION
-		- date
-		- 
-'''
-
-@app.route("/finances")
-def finance_index():
-	return render_template("finances/finances_index.html")
+@app.route("/tms")
+def tms_index():
+	return render_template("tms/tms_index.html")

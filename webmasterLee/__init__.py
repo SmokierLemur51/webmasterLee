@@ -15,4 +15,3 @@ bcrypt = Bcrypt(app)
 # login manager ... 
 
 from webmasterLee import routes
-from webmasterLee import finance_routes
