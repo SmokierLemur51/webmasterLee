@@ -20,21 +20,21 @@ class Location(db.Model):
 	def total_spent(self):
 		total = 0
 		for visit in self.visits:
-			total += visit.payment
+			total += visit.expense # i think i am trying to do the wrong thing here
 		return total
 
 	def update_total_spent(self):
-		self.total_spent = sum(visit.payment for visit in self.visits)
+		self.total_spent = sum(visit.expense for visit in self.visits)
 
 
 class Visit(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	date = db.Column(db.Date, nullable=False)
 	location = db.Column(db.Integer, db.ForeignKey("location.id"), nullable=False)
-	payment = db.relationship("Payment", uselist=False, backref="visit", lazy=True)
+	expense = db.relationship("Expense", uselist=False, backref="visit", lazy=True)
 
 
-class Payment(db.Model):
+class Expense(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	date = db.Column(db.Date, nullable=False)
 	amount = db.Column(db.Numeric(precision=10, scale=2), nullable=False) 

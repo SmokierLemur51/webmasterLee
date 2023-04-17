@@ -18,7 +18,6 @@ import utils
 '''
 
 @app.route("/finances")
-@app.route("/finances/")
 @app.route("/finances/home")
 def finances_index():
 	# this will be the main portal to track all income
@@ -28,7 +27,16 @@ def finances_index():
 	}
 	return render_template("finances/finances_index.html", context=context)
 
+@app.route("/finances/invenstments")
+def finances_investments():
+	
+	return render_template("finances/investments.html")
+
+@app.route("/finances/expenses")
+def finances_expenses():
+	return render_template("finances/expenses.html")
+
 
 @app.route("/finances/personal")
-def finances_():
+def finances_personal():
 	return render_template("finances/personal.html")
