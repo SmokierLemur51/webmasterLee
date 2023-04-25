@@ -1,0 +1,10 @@
+{% extends "tms/base_tms.html" %}
+
+{% block tmscontent %}
+	{% for x in tickets %}
+		<h1>{{ x["title"] }}</h1>
+		<p>{{ x["start"] }}</p>
+		<p>{{ x["content"] }}</p>
+	{% endfor %}
+
+{% endblock tmscontent %}

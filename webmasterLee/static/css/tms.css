@@ -1,0 +1,12 @@
+/* NAVBAR */
+
+.navtest {
+	/* gets rid of top whitespace */
+	padding-top: 0;
+}
+
+
+.color {
+	background-color: #A7CEAA;
+	padding: 10pt;
+}
