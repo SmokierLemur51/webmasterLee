@@ -8,48 +8,36 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tms.css') }}">
   </head>
   <body>
-    
 
-	<!-- navbar -->
-		<nav class="navbar navbar-expand-lg bg-body-tertiary navtest">
-			<div class="container-fluid color">
-				<div class="container-md">
-					
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="container">		
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<div class="conatiner">
-							<div class="row justify-content-center">	
-								
-										<div class="col">
-											<li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('tms_index') }}">Home</a></li>
-										</div	>
+	<nav class="navbar navbar-expand-lg navbar-light bg-success">
+		  <div class="container">
+		    <a class="navbar-brand" href="#">Brand</a>
+		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
+		    <div class="collapse navbar-collapse" id="navbarNav">
+		      <ul class="navbar-nav justify-content-between">
+		        <li class="nav-item">
+		          <a class="nav-link" href="{{ url_for('tms_index') }}">Home</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="{{ url_for('tms_create_ticket') }}">Create Ticket</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="{{ url_for('tms_manage_ticket') }}">Manage Tickets</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="{{ url_for('tms_view_progress') }}">View Tickets</a>
+		        </li>
+		      </ul>
+		    </div>
 
-										<div class="col">
-											<li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('tms_create_ticket') }}">Create Ticket</a></li>
-										</div>
+	  </div>
+	</nav>
 
-										<div class="col">
-											<li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('tms_manage_ticket') }}">Manage Tickets</a></li>
-										</div>
-
-										<div class="col">
-											<li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('tms_view_progress') }}">View Progress</a></li>
-										</div>
-	
-								</div>
-							</div>
-						</div>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</nav>
 
 		{% block tmscontent %}
+
 		{% endblock tmscontent %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

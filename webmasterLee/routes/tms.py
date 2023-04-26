@@ -15,12 +15,12 @@ tickets = {
 		{
 			"title": "testing 1",
 			"start": date.today(),
-			"content": "this is the content",
+			"content": ["this is the content",],
 		},
 		{
 			"title": "second test",
 			"start": date.today(),
-			"content": "second content pargraph"
+			"content": ["testing the list", "for this there is a lot to do", "keep going you can do it"],
 		},
 	],
 	"complete": [
