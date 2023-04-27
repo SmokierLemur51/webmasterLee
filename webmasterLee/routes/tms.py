@@ -3,8 +3,8 @@ from datetime import date
 from flask import render_template, url_for, flash, redirect, request
 from webmasterLee import app, db, bcrypt
 
-# from webmasterLee.forms import __forms__
-# from webmasterLee.models import __models__
+from webmasterLee.forms import *
+from webmasterLee.models import *
 
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -27,7 +27,7 @@ tickets = {
 		{
 			"title": "first completed",
 			"end": date.today(),
-			"content": "completed content",
+			"content": ["completed content",]
 		}
 	],
 
@@ -61,4 +61,7 @@ def tms_manage_ticket():
 
 @app.route("/tms/progress")
 def tms_view_progress():
-	return render_template("tms/tms_progress.html")
+
+
+
+	return render_template("tms/tms_progress.html", context=context)

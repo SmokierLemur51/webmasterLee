@@ -2,7 +2,7 @@
 
 {% block tmscontent %}
 	<section class="container-md">
-	<h1>Incomplete Tickets</h1></br></br>
+	<br><h1 class="text-center">Incomplete Tickets</h1></br></br>
 	{% if tickets is not none %}
 		<!--  use bootstrap modal -->
 		{% for x in tickets["incomplete"] %}
@@ -20,12 +20,20 @@
 
 		{% endfor %}
 
-	</br><h1>Complete Tickets</h1></br></br>
+	</br><h1 class="text-center">Complete Tickets</h1></br></br>
 
 		{% for x in tickets["complete"] %}
-			<h3>{{ x["title"] }}</h3>
-			<p>{{ x["end"] }}</p>
-			<p>{{ x["content"] }}</p><br>
+			<div class="card text-center">
+			  <div class="card-header">{{ x["title"] }}</div>
+			  <div class="card-body">
+			    <h5 class="card-title">To Do</h5>
+		    	{% for y in x["content"] %}
+			    	<p class="card-text">{{ y }}</p>
+			    {% endfor %}
+			    <a href="#" class="btn btn-primary">Manage Ticket</a>
+			  </div>
+			  <div class="card-footer text-body-secondary">Finished {{ x["end"] }}</div>
+			</div></br></br>
 		{% endfor %}	
 
 	{% else %}

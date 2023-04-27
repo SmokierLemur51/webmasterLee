@@ -5,7 +5,13 @@ My portfolio/booking website
 ## Version Tracking
 
 ### Notes
-- experiment with 
+
+need to find out how to make adding multiple todo to the tasks and multiple tasks to a ticket in batches to save some time
+
+### 0.0.2
+- removed some of the folders, it makes more sense to do the forms and models in one file each
+- created some forms
+
 
 ### 0.0.1 
 
