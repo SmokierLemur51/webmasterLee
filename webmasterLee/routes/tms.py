@@ -11,25 +11,21 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 ''' Temporary Testing Variables '''
 tickets = {
-	"incomplete": [
-		{
+	"incomplete": [{
 			"title": "testing 1",
 			"start": date.today(),
 			"content": ["this is the content",],
-		},
-		{
+		},{
 			"title": "second test",
 			"start": date.today(),
 			"content": ["testing the list", "for this there is a lot to do", "keep going you can do it"],
-		},
-	],
+		},],
 	"complete": [
 		{
 			"title": "first completed",
 			"end": date.today(),
 			"content": ["completed content",]
-		}
-	],
+		}],
 
 }
 
@@ -38,26 +34,37 @@ tickets = {
 @app.route("/tms")
 @app.route("/tms/")
 def tms_index():
-	context = {
-		"title": "Ticket Management System",
-		"about": "For tracking, and maintaining what is going on in my project space.", 
-	}
 
-	return render_template("tms/tms_index.html", context=context)
+	return render_template("tms/tms_index.html", tickets=tickets)
 
 
-@app.route("/tms/create")
-def tms_create_ticket():
-
-	return render_template("tms/tms_create.html")
-
-
-@app.route("/tms/manage")
+@app.route("/tms/manage", methods=["GET", "POST"])
 def tms_manage_ticket():
+	''' This will act as the main tickets page '''
+
+	return render_template("tms/tms_manage.html", form=ticket_form)
 
 
-	return render_template("tms/tms_manage.html", tickets=tickets)
 
+@app.route("/tms/create/ticket")
+def tms_create_ticket():
+	ticket_form = CreateTicketForm()	
+	if ticket_form.validate_on_submit():
+		ticket = Ticket(
+			title=ticket_form.title.data,
+			description=ticket_form.description.data,
+			date=date.today(),
+			personal=ticket_form.personal.data,
+		)
+		db.session.add(ticket)
+		db.session.commit()
+		return redirect(url_for("tms_index"))
+	return render_template("tms/tms_create.html", form=ticket_form)
+
+
+@app.route("/tms/create/<ticket>")
+def tms_manage__this_ticket(ticket, ticket_id):
+	return None
 
 @app.route("/tms/progress")
 def tms_view_progress():

@@ -1,4 +1,20 @@
 {% extends "tms/base_tms.html" %}
 
 {% block tmscontent %}
+	<section class="container-md">
+		<h1 class="text-center">Create Task</h1>
+		<form method="POST">
+			{{ form.hidden_tag() }}
+			<div class="form-group">
+				{{ form.title.label }}  {{ form.title }}
+			</div>
+			<div class="form-group">
+				{{ form.description.label }} {{ form.description }}
+			</div>
+			<div class="form-group">
+				{{ form.personal.label }} {{ form.description }}
+			</div>
+			<button type="submit" class="but btn-primary">Create Ticket</button>
+		</form>
+	</section>
 {% endblock tmscontent %}

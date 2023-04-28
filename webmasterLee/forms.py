@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
 
@@ -10,7 +10,7 @@ class CreateTicketForm(FlaskForm):
 	submit = SubmitField("Create Ticket")
 
 
-class UpdateTicketTasksForm(FlaskForm):
+class CreateTicketTasksForm(FlaskForm):
 	title = StringField("Task", validators=[DataRequired()])
 	description = TextAreaField("Description", validators=[DataRequired()])
 	submit = SubmitField("Add Task to Ticket")

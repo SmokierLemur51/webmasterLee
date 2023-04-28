@@ -1,5 +1,5 @@
 from datetime import date
-from webmasterLee import db, login_manager
+from webmasterLee import db
 from flask_login import UserMixin
 
 
@@ -13,7 +13,7 @@ class Ticket(db.Model):
 	description = db.Column(db.String(250), nullable=False)
 	complete = db.Column(db.Boolean, default=False)
 	personal = db.Column(db.Boolean, nullable=False) 
-	tasks = db.relationship("Tasks", backref="ticket", lazy=True)
+	tasks = db.relationship("Tasks", backref="ticket", lazy=True,)
 
 	# when not personal create timeclock to go in conjunction with it
 	# if self.personal is False:
@@ -27,7 +27,7 @@ class Tasks(db.Model):
 	title = db.Column(db.String(100), nullable=False)
 	description = db.Column(db.String(250), nullable=False)
 	ticket_id = db.Column(db.Integer, db.ForeignKey("tickets.id"), nullable=False)
-	subtasks = db.relationship("Subtask", backref="task", lazy=True)
+	subtasks = db.relationship("Subtask", backref="task", lazy=True,)
 
 
 class SubTask(db.Model):
@@ -41,6 +41,9 @@ class SubTask(db.Model):
 
 
 ''' ~~ ~~ FINANCES SECTION ~~ ~~ '''
+
+# class SpendingCategory(db.Model):
+
 
 class Category(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -77,10 +80,5 @@ class Expense(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	date = db.Column(db.Date, nullable=False)
 	amount = db.Column(db.Numeric(precision=10, scale=2), nullable=False) 
-
-
-
-
-
 
 
