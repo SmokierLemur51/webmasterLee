@@ -8,6 +8,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 
 ''' 
+ 	*** this file is going to be essentially the portfolio for clients
+
 	*** BASIC ROUTES *** 
 		- index
 		- about/services
