@@ -1,17 +1,37 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+from webmasterLee.config import Config
 
-app = Flask(__name__)
-app.config["SECRET_KEY"] = "test"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
+db = SQLAlchemy()
+bcrypt = Bcrypt()
+login_manager = LoginManager()
 
 
-db = SQLAlchemy(app)
 
-bcrypt = Bcrypt(app)
+def create_app(config_class=Config):
+	app = Flask(__name__, static_url_path="/static")
+	app.config.from_object(Config)
 
-# login manager ... 
+	db.init_app(app)
+	bcrypt.init_app(app)
+	login_manager.init_app(app)
+	
+	login_manager.login_view = "login"
+	login_manager.login_message_category = "info"
+	
+	from webmasterLee.public.routes import public
+	app.register_blueprint(public)
 
-from webmasterLee import routes
+	from webmasterLee.client.routes import client
+	app.register_blueprint(client)
+
+	from webmasterLee.guru.routes import guru
+	app.register_blueprint(guru)
+
+	return app
+
+
+
+app = create_app()	
+
