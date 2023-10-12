@@ -1,2 +1,0 @@
-
-FINNHUB_IO_KEY = "cgu73khr01qu2uq5rfh0cgu73khr01qu2uq5rfhg"

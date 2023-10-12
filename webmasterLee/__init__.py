@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 from webmasterLee.config import Config
 
 db = SQLAlchemy()
@@ -20,13 +21,13 @@ def create_app(config_class=Config):
 	login_manager.login_view = "login"
 	login_manager.login_message_category = "info"
 	
-	from webmasterLee.public.routes import public
-	app.register_blueprint(public)
+	from webmasterLee.main.views import main
+	app.register_blueprint(main)
 
-	from webmasterLee.client.routes import client
+	from webmasterLee.client.views import client
 	app.register_blueprint(client)
 
-	from webmasterLee.guru.routes import guru
+	from webmasterLee.guru.views import guru
 	app.register_blueprint(guru)
 
 	return app
