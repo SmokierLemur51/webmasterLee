@@ -21,3 +21,7 @@ class UpdateTicketSubTasksForm(FlaskForm):
 	description = TextAreaField("Description", validators=[DataRequired()])
 	submit = SubmitField("Create Task Todo Item")
 
+
+class CreateClientAccountForm(FlaskForm):
+	client = StringField("Client Name", validators=[DataRequired])
+	email = 
