@@ -1,33 +1,28 @@
-from flask import Blueprint, render_template, url_for, flash, redirect, request, jsonify
+from flask import Blueprint, render_template
 
 
-main = Blueprint("main", __name__, url_prefix="/") # template_folder="templates/main"
+main = Blueprint("main", __name__, url_prefix="/", template_folder="templates") 
 
 
-@main.route("/", methods=['GET', 'POST'])
+@main.route("/")
 def index():
-	# form = ScheduleEstimateForm()
-	return render_template("main/main.html", title="CheckErr") # argument for jinja variables
+	context = {"title": "Welcome",}
+	return render_template("index.html", context=context)
 
 
-@main.route("/about", methods=['GET', 'POST'])
+@main.route("/about")
 def about():
-	# form = ScheduleEstimateForm()
-	# if form.validate_on_submit():
-	# 	flash('Scheduling successful! Please check your email for additional information.', 'success')
-	# 	# work on models to make this possible
-	# else:
-	# 	flash('Scheduling unsuccessful. Please check required fields.', 'danger')
-	# # I think reviews should go here
-	return render_template("main/about.html", title='About')
+
+	return render_template("about.html", title='About')
 
 
 @main.route("/services")
 def services():
 
-	return render_template("main/services.html")
+	return render_template("services.html")
 
 
-# - - - - - - - - - - - - - - - - - - - - - - - - -
-# - - - - - - - - Form Processing - - - - - - - - -
-# - - - - - - - - - - - - - - - - - - - - - - - - -
+@main.route("/projects")
+def projects():
+	context = {"title": "WebmasterLee"}
+	return render_template("projects.html", context=context)

@@ -2,23 +2,25 @@
 # webmasterLee
 My portfolio/booking website
 
-## Version Tracking
+
+## Design/Layout Inspo
+
+The landing page will consist of the about, contact, and services pages condensed into
+a single landing page. 
+
+Best Examples
+- https://www.seanhalpin.xyz/   *by far the best*
+- https://brittanychiang.com/
+- https://dunks1980.com/
+
+List of peoples portfolios
+- https://www.hostinger.com/tutorials/web-developer-portfolio#10_Eric_Van_Holtz
+
 
 ### Notes
 
-need to find out how to make adding multiple todo to the tasks and multiple tasks to a ticket in batches to save some time
-
-### 0.0.2
-- removed some of the folders, it makes more sense to do the forms and models in one file each
-- created some forms
 
 
-### 0.0.1 
-
-- set up folders
-- added files
-- set up run//routes//imports//
-- 
 
 ### what do i want from this website?
 
