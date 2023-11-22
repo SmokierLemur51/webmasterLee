@@ -1,10 +1,16 @@
--- tables to create
+drop table if exists contact_request; -- done
 
--- client
+drop table if exists client_user;
+
+drop table if exists project_status; -- done
+drop table if exists project;
+
+drop table if exists ticket_status;
+drop table if exists ticket; 
 
 
+-- public tables 
 
-drop table if exists contact_request;
 create table contact_request (
     id integer primary key,
     name text not null,
@@ -12,21 +18,40 @@ create table contact_request (
     email text not null,
 );
 
+-- client tables
 
--- guru tables
-drop table if exists ticket_status;
-create table ticket_status (
+create table project_status (
     id integer primary key autoincrement,
-    'status' text not null,
-    
+    p_status text not null,
+    p_description text not null
+    created_at timestamp 
 );
 
 
+drop table if exists ticket_status;
+create table ticket_status (
+    id integer primary key autoincrement,
+    t_status text not null,
+    t_description text not null,
+    created_at timestamp
+);
 
-drop table if exists project;
-create table project();
+create table project (
+    id integer primary key autoincrement,
+    project_status_id integer,
+    created_at timestamp,
+    updated_at timestamp,
+    completed_at timestamp,
+    title text not null, 
+    content text not null,
+    client_id integer,
+    total_hours real, 
+    hourly_rate real,
 
-drop table if exists ticket;
+    foreign key (project_status_id) references project_status(id),
+    foreign key (client_id) references client_user(id)
+);
+
 create table ticket (
     id integer primary key,
     title text not null,
