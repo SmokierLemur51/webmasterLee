@@ -15,7 +15,7 @@ create table contact_request (
     id integer primary key,
     name text not null,
     phone text not null,
-    email text not null,
+    email text not null
 );
 
 -- client tables
@@ -36,6 +36,7 @@ create table ticket_status (
     created_at timestamp
 );
 
+
 create table project (
     id integer primary key autoincrement,
     project_status_id integer,
@@ -51,6 +52,7 @@ create table project (
     foreign key (project_status_id) references project_status(id),
     foreign key (client_id) references client_user(id)
 );
+
 
 create table ticket (
     id integer primary key,
