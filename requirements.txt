@@ -1,8 +1,5 @@
-Flask 
-Flask-SQLAlchemy
-Flask-Bcrypt
-Flask-WTForms -- switching to marshmallow
-
-
-~~ API ~~
-	 
+flask
+flask-login
+flask-sqlalchemy
+flask-bcrypt
+psycopg-binary

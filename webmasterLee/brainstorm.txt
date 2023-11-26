@@ -1,0 +1,34 @@
+need to brain-dump some knowledge
+
+projects 
+
+    status
+
+        can show project requested for when clients complete the request new project form
+
+    can be requested by client and approved by me 
+
+    can only be created by me
+    
+    can have many tickets
+
+
+
+
+tickets 
+
+    they can have many checklists
+
+        check lists can have many checks
+
+        you can add, delete or complete any time
+
+    they have a status
+
+        the status can be updated a couple times a day automatically 
+        based off of if the associated checklists have all boxes checked
+
+        the ticket will show that all checklist items are completed if there
+        were checklists and they are completed
+    
+    
