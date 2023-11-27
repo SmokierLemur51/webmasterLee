@@ -119,3 +119,4 @@ create table ticket (
     foreign key (status_id) references ticket_status(id),
     foreign key (project_id) references project(id)
 );
+

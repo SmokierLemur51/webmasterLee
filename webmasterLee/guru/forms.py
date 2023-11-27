@@ -1,27 +1,42 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
+from wtforms import (
+    StringField, SubmitField, FloatField,
+    BooleanField, TextAreaField, SelectField,
+	MultipleFileField,
+)    
+
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
+class LoginForm(FlaskForm):
+	pass
 
 class CreateTicketForm(FlaskForm):
-	title = StringField("Title", validators=[DataRequired()])
-	description = TextAreaField("Description", validators=[DataRequired()])
-	personal = BooleanField("Personal Project?")
-	submit = SubmitField("Create Ticket")
+	title = StringField(label="Title", validators=[DataRequired()])
+	description = TextAreaField(label="Description", validators=[DataRequired()])
+	personal = BooleanField(label="Personal Project?")
+	submit = SubmitField(label="Create Ticket")
 
 
 class CreateTicketTasksForm(FlaskForm):
-	title = StringField("Task", validators=[DataRequired()])
-	description = TextAreaField("Description", validators=[DataRequired()])
-	submit = SubmitField("Add Task to Ticket")
+	title = StringField(label="Task", validators=[DataRequired()])
+	description = TextAreaField(label="Description", validators=[DataRequired()])
+	submit = SubmitField(label="Add Task to Ticket")
 
 
 class UpdateTicketSubTasksForm(FlaskForm):
-	title = StringField("Todo", validators=[DataRequired()])
-	description = TextAreaField("Description", validators=[DataRequired()])
-	submit = SubmitField("Create Task Todo Item")
+	title = StringField(label="Todo", validators=[DataRequired()])
+	description = TextAreaField(label="Description", validators=[DataRequired()])
+	submit = SubmitField(label="Create Task Todo Item")
 
 
-class CreateClientAccountForm(FlaskForm):
-	client = StringField("Client Name", validators=[DataRequired])
-	email = 
+class CreateProjectForm(FlaskForm):
+	project_status = SelectField(label="Status", choices=[], )
+	client_id = SelectField()
+	title = StringField(label="Project Name", validators=[DataRequired()])
+	content = TextAreaField(label="Description", validators=[DataRequired()])
+	hourly_rate = FloatField()
+	total_hours = FloatField()
+	customer_files = MultipleFileField()
+
+
+
