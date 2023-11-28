@@ -1,10 +1,13 @@
 from flask import Blueprint, render_template, url_for, flash, redirect, request, jsonify
 
-guru = Blueprint("guru", __name__, url_prefix="/guru") # template_folder="templates/guru"
+guru = Blueprint("guru", __name__, template_folder="templates")
 
 @guru.route("/")
-def home():
-	return render_template("guru/index.html") # argument for jinja variables
+def index():
+	elements = {
+		"title": "Welcome Guru",
+	}
+	return render_template("guru-index.html", elements=elements)
 
 
 
