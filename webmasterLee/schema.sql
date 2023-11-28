@@ -27,7 +27,7 @@ create table contact_request (
     name varchar(50) not null,
     phone char(11) not null,
     email varchar(50) not null,
-    requested_at timestamp,
+    requested_at timestamp
 );
 
 create table client_contact (
@@ -85,7 +85,7 @@ create table project (
     total_hours real, 
     hourly_rate real,
     constraint fk_project_status foreign key (project_status_id) references project_status(id),
-    constraint fk_client foreign key (client_id) references client(id)
+    constraint fk_client foreign key (client_id) references client_account(id)
 );
 
 -- tickets
@@ -94,6 +94,21 @@ create table ticket_status (
     id int primary key generated always as identity,
     status_code varchar(25) not null,
     status_description varchar(255) not null
+);
+
+
+create table ticket (
+    id int primary key generated always as identity,
+    title varchar(50) not null,
+    content text not null,
+    client_id int,
+    status_id int, 
+    project_id int,
+    created_at timestamp,
+    completed_at timestamp,
+    foreign key (client_id) references client_account(id),
+    foreign key (status_id) references ticket_status(id),
+    foreign key (project_id) references project(id)
 );
 
 create table ticket_item (
@@ -105,18 +120,3 @@ create table ticket_item (
     completed_at timestamp,
     constraint fk_ticket foreign key (ticket_id) references ticket(id)
 );
-
-create table ticket (
-    id int primary key generated always as identity,
-    title varchar(50) not null,
-    content text not null,
-    client_id int,
-    status_id int, 
-    project_id int,
-    created_at timestamp,
-    completed_at timestamp,
-    foreign key (client_id) references client(id),
-    foreign key (status_id) references ticket_status(id),
-    foreign key (project_id) references project(id)
-);
-

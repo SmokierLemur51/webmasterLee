@@ -57,12 +57,12 @@ import psycopg2
 conn = psycopg2.connect(
     host="localhost",
     database="lee_development",
-    user="",
-    password="",
+    user="lemur",
+    password="~=KujC%.`xr*$jo;TkQM",
 )
 
 cur = conn.cursor()
 
 # exectute command from file 
-with current_app.open_resource("schema.sql") as f:
-    cur.execute(f.read().decode("utf-8"))
+with open("schema.sql", 'r') as f:
+    cur.execute(f.read())
