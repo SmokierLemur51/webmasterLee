@@ -30,7 +30,7 @@ def close_db(e=None):
 def init_db():
     db = get_db()
 
-    with current_app.open_resource('schema.sql') as f:
+    with current_app.open_resource('schemalite.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
 
@@ -48,21 +48,21 @@ def init_app(app):
 
 # postgres 
 
-import psycopg2
+# import psycopg2
 
 
 ## need to put username & password in the os env
 ## os.environ["DB_USERNAME"]
 ## os.environ["DB_PASS"]
-conn = psycopg2.connect(
-    host="localhost",
-    database="lee_development",
-    user="lemur",
-    password="~=KujC%.`xr*$jo;TkQM",
-)
+# conn = psycopg2.connect(
+#     host="localhost",
+#     database="lee_development",
+#     user="lemur",
+#     password="~=KujC%.`xr*$jo;TkQM",
+# )
 
-cur = conn.cursor()
+# cur = conn.cursor()
 
 # exectute command from file 
-with open("schema.sql", 'r') as f:
-    cur.execute(f.read())
+# with open("schema.sql", 'r') as f:
+#     cur.execute(f.read())
