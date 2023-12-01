@@ -1,5 +1,6 @@
 drop table if exists contact_request;
 
+drop table if exists client;
 drop table if exists client_contact;
 drop table if exists client_account;
 
@@ -28,6 +29,12 @@ create table contact_request (
     phone text not null,
     email text not null,
     requested_at timestamp
+);
+
+create table client (
+    id integer primary key autoincrement,
+    client text not null,
+    created_at timestamp default current_timestamp
 );
 
 create table client_contact (

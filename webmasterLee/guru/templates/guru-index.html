@@ -25,6 +25,12 @@
 
 
 {% block content %}
-
-
+<form action="#">
+  <select class="form-select" aria-label="Default select example">
+    <option selected>Open this select menu</option>
+    {% for x in elements['statuses'] %}
+      <option value="{{ x.index() }}">{{ x.title }}</option>
+    {% endfor %}
+  </select>
+</form>
 {% endblock content %}

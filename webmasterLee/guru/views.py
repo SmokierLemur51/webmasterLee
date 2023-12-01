@@ -1,14 +1,23 @@
-from flask import Blueprint, render_template, url_for, flash, redirect, request, jsonify
+from flask import Blueprint, render_template, current_app
+from ..extensions import db
+from sqlalchemy.ext.automap import automap_base
 
 guru = Blueprint("guru", __name__, template_folder="templates")
 
+with current_app.app_context():
+    Base = automap_base()
+    Base.prepare(db.engine, reflect=True)
+
+
 @guru.route("/")
 def index():
+	project_status = Base.classes.project_status
+	statuses = db.session.query(project_status).all()
 	elements = {
 		"title": "Welcome Guru",
+		"statuses": statuses,
 	}
 	return render_template("guru-index.html", elements=elements)
-
 
 
 
