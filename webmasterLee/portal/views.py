@@ -1,27 +1,20 @@
 from flask import Blueprint, render_template, current_app
 from ..extensions import db
-from sqlalchemy.ext.automap import automap_base
 
-guru = Blueprint("guru", __name__, template_folder="templates")
-
-with current_app.app_context():
-    Base = automap_base()
-    Base.prepare(db.engine, reflect=True)
+portal = Blueprint("portal", __name__, template_folder="templates")
 
 
-@guru.route("/")
+
+@portal.route("/")
 def index():
-	project_status = Base.classes.project_status
-	statuses = db.session.query(project_status).all()
 	elements = {
 		"title": "Welcome Guru",
-		"statuses": statuses,
 	}
-	return render_template("guru-index.html", elements=elements)
+	return render_template("portal-index.html", elements=elements)
 
 
 
-@guru.route("/tickets")
+@portal.route("/tickets")
 def tickets():
 
 	return render_template("tickets.html")
