@@ -7,7 +7,10 @@ from web.blueprints.director.routes import director
 
 def create_app():
     app = Flask(__name__, static_url_path="/static")
-    
+
+    app.config["SECRET_KEY"] = "mega_secret_key"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///testing.db"
+
     db.init_app(app)
     
     app.register_blueprint(public, url_prefix="/")
