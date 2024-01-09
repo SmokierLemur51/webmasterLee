@@ -1,18 +1,11 @@
 from quart import Quart
-
-from quart_sqlalchemy import SQLAlchemyConfig
-from quart_sqlalchemy.framework import QuartSQLAlchemy
+from web.blueprints.public.routes import public
+from web.blueprints.director.routes import director
 
 def create_app():
     app = Quart(__name__)
 
-    from web.public.routes import public
     app.register_blueprint(public, url_prefix="/")
-
-    from web.director.routes import director
     app.register_blueprint(director, url_prefix="/directors-corner/")
 
     return app
-
-
-    

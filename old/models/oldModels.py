@@ -1,5 +1,5 @@
 from datetime import date
-from webmasterLee import db
+from old import db
 from flask_login import UserMixin
 
 
