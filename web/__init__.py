@@ -6,7 +6,7 @@ from web.blueprints.director.routes import director
 
 
 def create_app():
-    app = Flask(__name__, static)
+    app = Flask(__name__, static_url_path="/static")
     
     db.init_app(app)
     

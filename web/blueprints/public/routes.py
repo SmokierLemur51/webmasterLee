@@ -1,19 +1,19 @@
-from quart import Blueprint
-from quart.templating import render_template
+from flask import Blueprint, render_template
+
 
 public = Blueprint("public", __name__, template_folder="templates")
 
 @public.route("/")
-async def index():
+def index():
     elements = {"home": "Logan Lee Development"}
-    return await render_template("index.html", elements=elements)
+    return render_template("index.html", elements=elements)
 
 @public.route("/projects/")
-async def projects():
+def projects():
     elements = {"home": "Logan Lee Development"}
-    return await render_template("projects.html", elements=elements)
+    return render_template("projects.html", elements=elements)
 
 @public.route("/hosting/")
-async def services():
+def services():
     elements = {"home": "Logan Lee Development"}
-    return await render_template("services.html", elements=elements)
+    return render_template("services.html", elements=elements)

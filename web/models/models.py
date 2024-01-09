@@ -37,5 +37,5 @@ class Project(Base):
     status: Mapped[bool] = mapped_column(sa.Boolean, nullable=False, default=False)
     project_name: Mapped[str] = mapped_column(sa.String(100), nullable=False, unique=True)
     project_description: Mapped[str] = mapped_column(sa.String(500), nullable=False)
-    client_id: Mapped[int] = mapped_column(sa.ForeignKey("clients.id"), )
+    client_id: Mapped[int] = mapped_column(sa.ForeignKey("clients.id"))
 

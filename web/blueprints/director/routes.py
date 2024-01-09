@@ -1,23 +1,22 @@
-from quart import Blueprint
-from quart.templating import render_template
+from flask import Blueprint, render_template
 
 director = Blueprint("director", __name__, template_folder="templates")
 
 
 @director.route("/")
-async def home():
+def home():
     elements = {"home": "Directors Corner"}
-    return await render_template("home.html", elements=elements)
+    return render_template("home.html", elements=elements)
 
 
 @director.route("/projects/")
-async def projects():
-    return await render_template("projects.html",
+def projects():
+    return render_template("projects.html",
                                  elements={"home": "Directors Corner"})
 
 
 @director.route("/customers/")
-async def customers():
+def customers():
     elements = {
         "home": "Directors Corner",
         "customers": [
@@ -38,16 +37,16 @@ async def customers():
             },
         ]
     }
-    return await render_template("customers.html", elements=elements)
+    return render_template("customers.html", elements=elements)
 
 
 @director.route("/subscriptions/")
-async def subscriptions():
-    return await render_template("subscriptions.html",
+def subscriptions():
+    return render_template("subscriptions.html",
                                  elements={"home": "Directors Corner"})
 
 
 @director.route("/finances/")
-async def finances():
-    return await render_template("finances.html",
+def finances():
+    return render_template("finances.html",
                                  elemets={"home": "Directors Corner"})
