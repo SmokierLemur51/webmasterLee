@@ -1,44 +1,41 @@
-from quart import Blueprint
+from quart import Blueprint, request, url_for
 from quart.templating import render_template
 
-director = Blueprint("director", __name__, template_folder="templates")
+director = Blueprint("director", __name__, template_folder="dtemplates")
 
 
 @director.route("/")
 async def home():
-    elements = {"home": "Directors Corner"}
-    return await render_template("home.html", elements=elements)
+    return await render_template("home.html", 
+                                    elements={"title": "Directors Corner"})
 
 
 @director.route("/projects/")
 async def projects():
+    if request.method == "POST":
+        print("Post")
+
     return await render_template("projects.html",
                                  elements={"home": "Directors Corner"})
 
+@director.route("/projects/<int:proj_id>/", methods=["POST"])
+async def view_project(proj_id):
+    
+    return await render_template()
 
-@director.route("/customers/")
-async def customers():
-    elements = {
-        "home": "Directors Corner",
-        "customers": [
-            {
-                "customer": "Higganbotham Paint",
-                "project": 1,
-                "price": 200.00
-            },
-            {
-                "customer": "Personal",
-                "project": 2,
-                "price": 0.00
-            },
-            {
-                "customer": "Personal",
-                "project": 3,
-                "price": 0.00
-            },
-        ]
-    }
-    return await render_template("customers.html", elements=elements)
+@director.route("/clients/", methods=["GET", "POST"])
+async def clients():
+    if request.method == "POST":
+        form = await request.form
+        if form["newClientForm"]:
+            print(form["fname"])
+        elif form["newLeadForm"]:
+            print(form["phone"])
+        else:
+            pass 
+
+    return await render_template("clients.html", 
+                        elements={"title": "Directors Corner"})
 
 
 @director.route("/subscriptions/")

@@ -1,0 +1,129 @@
+{% extends "director.html" %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg color">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('director.home') }}">{{ elements["home"] }}</a>
+    <div class="container-md">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{ url_for('director.home') }}">Home</a>
+          </li>
+
+          <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('director.projects') }}">Projects</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ url_for('director.clients') }}">Clients</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('director.subscriptions') }}">Subscriptions</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('director.finances') }}">Finances</a>
+          </li>
+            
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+{% endblock navbar %}
+
+{% block main %}
+<div class="container-md">
+  <div class="row align-items-center"> 
+    <div class="col">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary container-fluid" data-bs-toggle="modal" data-bs-target="#newClient">
+        Create New Client
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="newClient" tabindex="-1" aria-labelledby="newClientLabel" aria-hidden="true">
+        <form id="newClientForm" action="{{ url_for('director.clients') }}" method="post">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="newClientLabel">Create Client</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="company">Company</label>
+                  <input type="text" class="form-control" id="company" name="company">
+                </div>
+                <div class="form-group">
+                  <label for="fname">First Name</label>
+                  <input type="text" class="form-control" id="fname" name="fname">
+                </div>
+                <div class="form-group">
+                  <label for="lname">Last Name</label>
+                  <input type="text" class="form-control" id="lname" name="lname">
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="text" class="form-control" id="phone" name="phone">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Client</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>  
+    
+    <div class="col">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary container-fluid" data-bs-toggle="modal" data-bs-target="#newLead">
+        Create New Lead
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="newLead" tabindex="-1" aria-labelledby="newLeadLabel" aria-hidden="true">
+        <form id="newLeadForm" action="{{ url_for('director.clients') }}" method="post">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="newLeadLabel">Create Lead</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="company">Company</label>
+                  <input type="text" class="form-control" id="company" name="company">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="text" class="form-control" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                  <label for="contact">Contact Name</label>
+                  <input type="text" class="form-control" id="contact" name="contact">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Lead</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>  
+
+  </div>
+</div>
+{% endblock main %}

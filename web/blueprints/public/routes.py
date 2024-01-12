@@ -8,10 +8,10 @@ async def index():
     elements = {"home": "Logan Lee Development"}
     return await render_template("index.html", elements=elements)
 
-@public.route("/projects/")
-async def projects():
+@public.route("/portfolio/")
+async def portfolio():
     elements = {"home": "Logan Lee Development"}
-    return await render_template("projects.html", elements=elements)
+    return await render_template("portfolio.html", elements=elements)
 
 @public.route("/hosting/")
 async def services():

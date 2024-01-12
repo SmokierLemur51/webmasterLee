@@ -1,0 +1,73 @@
+{% extends "director.html" %}
+
+{% block navbar %}
+  <nav class="navbar navbar-expand-lg color">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('director.home') }}">{{ elements["home"] }}</a>
+      <div class="container-md">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{{ url_for('director.home') }}">Home</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('director.projects') }}" >Projects</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('director.clients') }}">Clients</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('director.subscriptions') }}">Subscriptions</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('director.finances') }}">Finances</a>
+            </li>
+              
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+{% endblock navbar %}
+
+
+{% block main %}
+<div class="container-md">
+  <div class="row"> 
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Create New Project
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <form action="{{ url_for('director.projects') }}" method="post">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="ingredient">Ingredient</label>
+                <input type="text" class="form-control" id="ingredient" name="ingredient">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock main %}
+  
