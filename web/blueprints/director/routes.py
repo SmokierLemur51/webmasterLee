@@ -37,6 +37,18 @@ async def create_new_project():
 
 
 
+@director.route("projects/create/create-api/", methods=["POST"])
+async def create_project_api():
+    """
+    This endpoint will be for json decoding of new projects created by my build_it
+    project creator. 
+    """ 
+    if request.method == "POST":
+        return "new project created"
+    return "" 
+
+
+
 @director.route("/projects/<int:proj_id>/", methods=["POST"])
 async def view_project(proj_id):
     """For showing information about the selected project"""
