@@ -46,7 +46,8 @@
 
       <!-- Modal -->
       <div class="modal fade" id="newClient" tabindex="-1" aria-labelledby="newClientLabel" aria-hidden="true">
-        <form id="newClientForm" action="{{ url_for('director.clients') }}" method="post">
+        <form id="newClientForm" action="{{ url_for('director.create_new_client') }}" method="post">
+          <input type="hidden" id="hiddenNewClient" name="hiddenNewClient" value="hiddenNewClient">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -89,7 +90,8 @@
 
       <!-- Modal -->
       <div class="modal fade" id="newLead" tabindex="-1" aria-labelledby="newLeadLabel" aria-hidden="true">
-        <form id="newLeadForm" action="{{ url_for('director.clients') }}" method="post">
+        <form id="newLeadForm" action="{{ url_for('director.create_new_lead') }}" method="post">
+          <input type="hidden" id="hiddenNewLead" name="hiddenNewLead" value="hiddenNewLead">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
