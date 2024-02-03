@@ -1,5 +1,0 @@
-
-
-for setting up postgres
-https://pgjones.dev/blog/quart-postgres-2021/
-
