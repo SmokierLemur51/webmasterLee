@@ -6,6 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// this is kind of pointless
 func CreateProject(status, client uint, personal bool, codename, description string, hourlyRate, wholesale, subscription float64) Project {
 	return Project{
 		StatusCodeID:      status,

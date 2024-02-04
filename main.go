@@ -35,6 +35,7 @@ func main() {
 	portal.ConfigureRoutes(r)
 
 	// tests.CreateModels(portal.DB)
+	// tests.PopulateStatCodes(portal.DB)
 	// tests.PopulateLeads(portal.DB)
 	// tests.PopulateClients(portal.DB)
 

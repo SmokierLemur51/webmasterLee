@@ -35,10 +35,10 @@ func (h PortalHandler) ConfigureRoutes(r chi.Router) {
 func (h PortalHandler) PortalRoute() http.HandlerFunc {
 	// test authentication here
 	return func(w http.ResponseWriter, r *http.Request) {
-		codes, _ := models.QueryStatusCodes(h.DB)
+		codes, _ := models.QueryStatCodes(h.DB)
 		leads, _ := models.QueryLeads(h.DB, "all")
 		clients, _ := models.QueryClients(h.DB, "all")
-		p := PortalPageData{Page: "portal/portal.html", Title: "Success", StatCodes: codes, Leads: leads, Clients: clients}
+		p := PortalPageData{Page: "portal.html", CSS: PORTAL_CSS, Title: "Success", StatCodes: codes, Leads: leads, Clients: clients}
 		p.RenderHTMLTemplate(w)
 	}
 }
@@ -46,15 +46,10 @@ func (h PortalHandler) PortalRoute() http.HandlerFunc {
 func (h PortalHandler) ProjectsRoute() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		clients, err := models.QueryClients(h.DB, "all")
-		if err != nil {
-			panic(err)
-		}
-		leads, err := models.QueryLeads(h.DB, "all")
-		if err != nil {
-			panic(err)
-		}
-		p := PortalPageData{Page: "portal/projects.html", Title: "Projects", Clients: clients, Leads: leads}
+		codes, _ := models.QueryStatCodes(h.DB)
+		leads, _ := models.QueryLeads(h.DB, "all")
+		clients, _ := models.QueryClients(h.DB, "all")
+		p := PortalPageData{Page: "projects.html", CSS: PORTAL_CSS, Title: "Projects", StatCodes: codes, Clients: clients, Leads: leads}
 		p.RenderHTMLTemplate(w)
 	}
 }
@@ -68,17 +63,18 @@ func (h PortalHandler) CreateProjectHandler() http.HandlerFunc {
 			// add better error handling
 			http.Error(w, err.Error(), http.StatusBadRequest)
 		}
-		c := r.FormValue("codename")
-		s := r.FormValue("leadSelect")
+
 		err := ProcessCreateProjectForm(
+			h.DB,
 			r.FormValue("status"), r.FormValue("lead"), r.FormValue("client"),
 			r.FormValue("codename"), r.FormValue("description"), r.FormValue("hourly"),
 			r.FormValue("wholesale"), r.FormValue("totalTime"), r.FormValue("subscription"),
 		)
 		if err != nil {
 			log.Println(err)
+			http.Redirect(w, r, "portal/projects/", http.StatusBadRequest)
 		}
-		fmt.Printf("\nCodename: %s Lead: %v\n\n", c, s)
+
 		http.Redirect(w, r, "/portal/projects/", http.StatusSeeOther)
 	}
 }
@@ -90,7 +86,7 @@ func (h PortalHandler) FinancesRoute() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		// need to define models for finances
-		p := PortalPageData{Page: "portal/finances.html", Title: "Finances"}
+		p := PortalPageData{Page: "finances.html", Title: "Finances"}
 		p.RenderHTMLTemplate(w)
 	}
 }

@@ -1,8 +1,6 @@
 package models
 
 import (
-	"time"
-
 	"gorm.io/gorm"
 )
 
@@ -47,7 +45,7 @@ type Project struct {
 	Client            Client     `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 	Codename          string
 	Description       string
-	TotalTime         time.Time
+	TotalTime         float64
 	HourlyRate        float64 `gorm:"default:0.0"`
 	WholesalePrice    float64 `gorm:"default:0.0"`
 	SubscriptionPrice float64 `gorm:"default:0.0"`
@@ -121,10 +119,10 @@ type Finances struct {
 	gorm.Model
 }
 
-func QueryStatusCodes(db *gorm.DB) ([]StatusCode, error) {
-	var codes []StatusCode
-	if result := db.Find(&codes); result.Error != nil {
+func QueryStatCodes(db *gorm.DB) ([]StatusCode, error) {
+	var stats []StatusCode
+	if result := db.Find(&stats); result.Error != nil {
 		return nil, result.Error
 	}
-	return codes, nil
+	return stats, nil
 }

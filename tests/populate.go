@@ -9,6 +9,24 @@ func CreateModels(db *gorm.DB) {
 	db.AutoMigrate(&models.Lead{}, &models.Client{}, &models.StatusCode{}, &models.TimeClock{}, &models.Project{})
 }
 
+func PopulateStatCodes(db *gorm.DB) error {
+	statCodes := []*models.StatusCode{
+		{StatCode: "new", StatDescription: "brand new, nothing setup yet"},
+		{StatCode: "pitching", StatDescription: "pitching idea to potential customer"},
+		{StatCode: "planning", StatDescription: "planning phase, taking customer parameters and deciding direction"},
+		{StatCode: "development", StatDescription: "building application"},
+		{StatCode: "review", StatDescription: "waiting on client review"},
+		{StatCode: "production", StatDescription: "project has moved into production"},
+		{StatCode: "maintenance", StatDescription: "fixing bugs, reviewing errors"},
+	}
+	for _, s := range statCodes {
+		if result := db.FirstOrCreate(&s, s); result.Error != nil {
+			return result.Error
+		}
+	}
+	return nil
+}
+
 func PopulateLeads(db *gorm.DB) error {
 	leads := []*models.Lead{
 		{Company: "Thrasher Improvements", Phone: "502-802-1437", Contacted: false, Converted: false},
@@ -48,23 +66,6 @@ func PopulateClients(db *gorm.DB) error {
 	}
 	for _, c := range clients {
 		if result := db.FirstOrCreate(&c, c); result.Error != nil {
-			return result.Error
-		}
-	}
-	return nil
-}
-
-// this func is useless,
-func PopulateProjects(db *gorm.DB) error {
-	var personal models.Client
-	if result := db.Where("company = ?", "Personal").First(&personal); result.Error != nil {
-		return result.Error
-	}
-	projects := []*models.Project{
-		{},
-	}
-	for _, p := range projects {
-		if result := db.FirstOrCreate(&p, p); result.Error != nil {
 			return result.Error
 		}
 	}

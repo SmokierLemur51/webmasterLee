@@ -75,7 +75,7 @@
                           <div class="mb-3">
                               <label for="statSelect">Select Status</label>
                               <select name="statSelect" id="statSelect" class="form-select" aria-label="Default select example">
-                                <option selected>Select Project Status</option>
+                                <option selected></option>
                                 {{ range .StatCodes }}
                                   <option value="{{ .ID }}">{{ .StatCode }}</option>
                                 {{ end }}
@@ -84,7 +84,7 @@
                           <div class="mb-3">
                               <label for="clientSelect">Select Client</label>
                               <select name="clientSelect" id="clientSelect" class="form-select" aria-label="Default select example">
-                                <option selected>Select Client</option>
+                                <option selected></option>
                                 {{ range .Clients }}
                                   <option value="{{ .ID }}">{{ .Company }}</option>
                                 {{ end }}

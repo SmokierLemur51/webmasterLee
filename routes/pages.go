@@ -18,7 +18,8 @@ type PublicPageData struct {
 	CSS     string
 }
 
-var CSS_URL string = "/static/css/main.css"
+var PUBLIC_CSS string = "/static/css/main.css"
+var PORTAL_CSS string = "/static/css/portal.css"
 
 func (p PublicPageData) RenderHTMLTemplate(w http.ResponseWriter) {
 	tmpl, err := template.ParseFiles("templates/" + p.Page)
@@ -48,7 +49,7 @@ type PortalPageData struct {
 }
 
 func (p PortalPageData) RenderHTMLTemplate(w http.ResponseWriter) {
-	tmpl, err := template.ParseFiles("templates/" + p.Page)
+	tmpl, err := template.ParseFiles("templates/portal/" + p.Page)
 	if err != nil {
 		return
 	}

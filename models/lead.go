@@ -36,3 +36,15 @@ func QueryLeads(db *gorm.DB, status string) ([]Lead, error) {
 		return leads, nil
 	}
 }
+
+func (l *Lead) ConvertLeadIntoClient(db *gorm.DB) (*Client, error) {
+	// first update converted bool to true
+	l.Converted = true
+	if result := db.Save(l); result.Error != nil {
+		return nil, result.Error
+	}
+	// return new client
+	return (&Client{
+		Company: l.Company, Name: l.Name, Phone: l.Phone, Email: l.Email,
+	}), nil
+}
