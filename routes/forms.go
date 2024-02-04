@@ -73,7 +73,15 @@ func ProcessCreateProjectForm(
 	timeSpent, _ := ConvertStrToFloat64(totalTime)
 	subs, _ := ConvertStrToFloat64(subscription)
 	stat, _ := ConvertStrTo_Uint(status)
-	if len(lead) > 0 {
+  
+  // printing the above for debug
+  fmt.Printf("Hourly Rate: %f\n", hourlyRate)
+  fmt.Printf("Wholesale: %f\n", wholesalePrice)
+  fmt.Printf("Time: %f\n", timeSpent)
+  fmt.Printf("SubscriptionPrice: %f\n", subs)
+  fmt.Printf("Status ID: %v", stat)
+
+  if len(lead) != 0 {
 
 		// convert lead to client
 		var convertedLead models.Lead
@@ -104,7 +112,7 @@ func ProcessCreateProjectForm(
 		if err := newProject.Insert(db); err != nil {
 			return err
 		}
-	} else if len(client) > 0 {
+	} else if len(client) != 0 {
 		clientID, _ := ConvertStrTo_Uint(client)
 		var personal bool
 		if clientID == 1 {

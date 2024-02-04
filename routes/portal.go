@@ -63,7 +63,7 @@ func (h PortalHandler) CreateProjectHandler() http.HandlerFunc {
 			// add better error handling
 			http.Error(w, err.Error(), http.StatusBadRequest)
 		}
-
+    fmt.Printf("\nTest Check: %s\n", r.FormValue("test"))
 		err := ProcessCreateProjectForm(
 			h.DB,
 			r.FormValue("status"), r.FormValue("lead"), r.FormValue("client"),
