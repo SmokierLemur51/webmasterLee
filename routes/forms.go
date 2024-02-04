@@ -8,6 +8,7 @@ as well as creating relavant information from the form data
 */
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 
@@ -72,7 +73,8 @@ func ProcessCreateProjectForm(
 	timeSpent, _ := ConvertStrToFloat64(totalTime)
 	subs, _ := ConvertStrToFloat64(subscription)
 	stat, _ := ConvertStrTo_Uint(status)
-	if len(lead) > 0 && len(client) == 0 {
+	if len(lead) > 0 {
+
 		// convert lead to client
 		var convertedLead models.Lead
 		if result := db.Where("id = ?", lead).First(&convertedLead); result.Error != nil {
@@ -102,7 +104,7 @@ func ProcessCreateProjectForm(
 		if err := newProject.Insert(db); err != nil {
 			return err
 		}
-	} else if len(client) > 0 && len(lead) == 0 {
+	} else if len(client) > 0 {
 		clientID, _ := ConvertStrTo_Uint(client)
 		var personal bool
 		if clientID == 1 {
@@ -125,6 +127,6 @@ func ProcessCreateProjectForm(
 			return err
 		}
 	}
-
+	fmt.Println("Neither Executed")
 	return nil
 }
