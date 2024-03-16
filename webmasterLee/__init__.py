@@ -1,38 +1,27 @@
+# from .extensions import clientele_login_manager, portal_login_manager
+from .models import db
+from .config import Config
+from .blueprints.portal import portal
+from .blueprints.clients import clients
+from .blueprints.public import public
+
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
-from webmasterLee.config import Config
-
-db = SQLAlchemy()
-bcrypt = Bcrypt()
-login_manager = LoginManager()
-
 
 
 def create_app(config_class=Config):
-	app = Flask(__name__, static_url_path="/static")
-	app.config.from_object(Config)
+    app = Flask(__name__, static_url_path="/static")
 
-	db.init_app(app)
-	bcrypt.init_app(app)
-	login_manager.init_app(app)
-	
-	login_manager.login_view = "login"
-	login_manager.login_message_category = "info"
-	
-	from webmasterLee.main.views import main
-	app.register_blueprint(main)
+    # config 
+    app.config.from_object(Config)
 
-	from webmasterLee.client.views import client
-	app.register_blueprint(client)
+    # extensions
+    db.init_app()
+    # clientele_login_manager
+    # portal_login_manager
 
-	from webmasterLee.guru.views import guru
-	app.register_blueprint(guru)
+    # blueprints
+    app.register_blueprint(public, url_prefix="/")
+    app.register_blueprint(clients, url_prefix="/clientele")
+    app.register_blueprint(portal, url_prefix="/portal")
 
-	return app
-
-
-
-app = create_app()	
-
+    return app
