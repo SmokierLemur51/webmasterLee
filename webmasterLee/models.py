@@ -34,8 +34,7 @@ class Lead(Base):
     converted: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     created_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=func.now())
     contacted_at: Mapped[datetime.datetime] = mapped_column(DateTime, nullable=True)
-
-
+    comment: Mapped[str] = mapped_column(String(255))
 
 class Client(Base):
     __tablename__ = "clients"
