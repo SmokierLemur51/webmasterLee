@@ -21,20 +21,46 @@ class Base(DeclarativeBase):
 
 db = SQLAlchemy(model_class=Base)
 
+class LeadDiscoveryMethod(Base):
+    """
+    The method of discovery for a new lead. This will be great for future 
+    lead targetting. 
+    """
+    __tablename__ = "lead_discovery_methods"
+    
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    method: Mapped[str] = mapped_column(String(120), nullable=False)
+    method_description: Mapped[str] = mapped_column(String(255))
+
+    leads: Mapped[List["Lead"]] = relationship(back_populates="discovery_method")
 
 class Lead(Base):
     __tablename__ = "leads"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    company: Mapped[str] = mapped_column(String(100))
-    name: Mapped[str] = mapped_column(String(100))
-    email: Mapped[str] = mapped_column(String(100))
-    phone: Mapped[str] = mapped_column(String(12), nullable=False)
-    contacted: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
-    converted: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    discovery_method_id: Mapped[int] = mapped_column(ForeignKey("lead_discovery_methods.id"))
+    company: Mapped[str] = mapped_column(String(100), nullable=True)
+    name: Mapped[str] = mapped_column(String(100), nullable=True)
+    email: Mapped[str] = mapped_column(String(100), nullable=True)
+    phone: Mapped[str] = mapped_column(String(12), nullable=True)
+    contacted: Mapped[bool] = mapped_column(Boolean, default=False)
+    converted: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=func.now())
     contacted_at: Mapped[datetime.datetime] = mapped_column(DateTime, nullable=True)
-    comment: Mapped[str] = mapped_column(String(255))
+    comment: Mapped[str] = mapped_column(String(255), nullable=True)
+
+    discovery_method: Mapped[LeadDiscoveryMethod] = relationship("LeadDiscoveryMethod", back_populates="leads")
+    notes: Mapped[List["LeadNote"]] = relationship(back_populates="lead")
+
+class LeadNote(Base):
+    __tablename__ = "lead_notes"
+    
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    lead_id: Mapped[int] = mapped_column(ForeignKey("leads.id"))
+    note: Mapped[str] = mapped_column(String(255), nullable=False)
+    content: Mapped[str] = mapped_column(String(500))
+
+    lead: Mapped[Lead] = relationship("Lead", back_populates="notes")
 
 class Client(Base):
     __tablename__ = "clients"
