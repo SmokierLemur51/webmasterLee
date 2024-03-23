@@ -21,12 +21,12 @@ class Base(DeclarativeBase):
 
 db = SQLAlchemy(model_class=Base)
 
-class LeadDiscoveryMethod(Base):
+class DiscoveryMethod(Base):
     """
-    The method of discovery for a new lead. This will be great for future 
-    lead targetting. 
+    Originally created for leads only, but it would be smarter to be able
+    to apply this to leads and clients. 
     """
-    __tablename__ = "lead_discovery_methods"
+    __tablename__ = "discovery_methods"
     
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     method: Mapped[str] = mapped_column(String(120), nullable=False)
@@ -34,11 +34,13 @@ class LeadDiscoveryMethod(Base):
 
     leads: Mapped[List["Lead"]] = relationship(back_populates="discovery_method")
 
+
+
 class Lead(Base):
     __tablename__ = "leads"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    discovery_method_id: Mapped[int] = mapped_column(ForeignKey("lead_discovery_methods.id"))
+    discovery_method_id: Mapped[int] = mapped_column(ForeignKey("discovery_methods.id"))
     company: Mapped[str] = mapped_column(String(100), nullable=True)
     name: Mapped[str] = mapped_column(String(100), nullable=True)
     email: Mapped[str] = mapped_column(String(100), nullable=True)
@@ -49,8 +51,10 @@ class Lead(Base):
     contacted_at: Mapped[datetime.datetime] = mapped_column(DateTime, nullable=True)
     comment: Mapped[str] = mapped_column(String(255), nullable=True)
 
-    discovery_method: Mapped[LeadDiscoveryMethod] = relationship("LeadDiscoveryMethod", back_populates="leads")
+    discovery_method: Mapped[DiscoveryMethod] = relationship("DiscoveryMethod", back_populates="leads")
     notes: Mapped[List["LeadNote"]] = relationship(back_populates="lead")
+
+
 
 class LeadNote(Base):
     __tablename__ = "lead_notes"
@@ -61,6 +65,8 @@ class LeadNote(Base):
     content: Mapped[str] = mapped_column(String(500))
 
     lead: Mapped[Lead] = relationship("Lead", back_populates="notes")
+
+
 
 class Client(Base):
     __tablename__ = "clients"
@@ -105,6 +111,31 @@ class Project(Base):
     client: Mapped[Client] = relationship(back_populates="projects")
     
     tickets: Mapped[List["Ticket"]] = relationship(back_populates="project")
+    checklists: Mapped[List["ProjectChecklist"]] = relationship(back_populates="project")
+
+
+
+class ProjectChecklist(Base):
+    __tablename__ = "project_checklists"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    project_id: Mapped[int] = mapped_column(ForeignKey("projects.id"), nullable=False)
+    checklist_name: Mapped[str] = mapped_column(String(120), nullable=False)
+    complete: Mapped[bool] = mapped_column(Boolean, default=False)
+
+    checklist_items: Mapped[List["ChecklistItems"]] = relationship(back_populates="checklist")
+
+
+
+class ProjectChecklistItem(Base):
+    __tablename__ = "project_checklist_items"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    checklist_id: Mapped[int] = mapped_column(ForeignKey("project_checklists.id"), nullable=False)
+    item: Mapped[str] = mapped_column(String(100), nullable=False)
+    item_description: Mapped[str] = mapped_column(String(255), nullable=True) # displayed when hover over item name
+    complete: Mapped[bool] = mapped_column(Boolean, default=False)
+    
+    checklist: Mapped[ProjectChecklist] = mapped_column("ProjectChecklist", back_populates="checklist")
+
 
 
 class Ticket(Base):

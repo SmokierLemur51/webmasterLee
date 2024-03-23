@@ -1,8 +1,12 @@
 """
 File: blueprints/portal/routes.py
 
-Routes for the administration team. Mainly for maintaining
-cutstomer information and tracking projects. 
+Routes for the administration team. Mainly for building & maintaining 
+customer relationships.
+ 
+
+Formatting:
+    - 3 Lines in between each function
 
 Author: Logan Lee
 """
@@ -16,9 +20,13 @@ portal = Blueprint("portal", __name__, template_folder="portal_templates")
 @portal.route("/")
 def home():
     """
+    Homepage to contain general information. One thing that I want to see
+    is the schedule, contact requests, and project deadlines.
     """
     elements = {"title": "Portal Home"}
     return render_template("home.html", elements=elements)
+
+
 
 @portal.route("/leads")
 def leads():
@@ -33,6 +41,8 @@ def leads():
     create_form = CreateLead()
     return render_template("leads.html", elements=elements, leads=leads)
 
+
+
 @portal.route("/leads/<int:lead_id>")
 def view_lead(lead_id):
     """
@@ -42,15 +52,21 @@ def view_lead(lead_id):
     elements = {"title": lead.company}
     return render_template("lead.html", elements=elements, lead=lead)
 
+
+
 @portal.route("/crm")
 def crm():
     elements = {"title": "CRM"}
     return render_template("crm.html", elements=elements)
 
+
+
 @portal.route("/projects")
 def projects():
     elements = {"title": "Projects"}
     return render_template("projects.html", elements=elements)
+
+
 
 
 @portal.route("/projects/<int:project_id>")
@@ -59,7 +75,12 @@ def show_project(project_id):
     return render_template("project.html", elements=elements)
 
 
+
 @portal.route("/projects/<int:project_id>/update", methods=["POST"])
 def update_project(project_id):
     # update project here
     return redirect(url_for("show_project"))
+
+
+
+# @portal.route()
