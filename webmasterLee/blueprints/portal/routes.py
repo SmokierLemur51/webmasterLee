@@ -13,8 +13,8 @@ from .forms import CreateLead
 
 portal = Blueprint("portal", __name__, template_folder="portal_templates")
 
-@portal.route("/home")
-def homepage():
+@portal.route("/")
+def home():
     """
     """
     elements = {"title": "Portal Home"}
@@ -33,6 +33,19 @@ def leads():
     create_form = CreateLead()
     return render_template("leads.html", elements=elements, leads=leads)
 
+@portal.route("/leads/<int:lead_id>")
+def view_lead(lead_id):
+    """
+    View specific lead. Contains options for updating & deleting.
+    """
+    lead = db.get_or_404(Lead, lead_id) 
+    elements = {"title": lead.company}
+    return render_template("lead.html", elements=elements, lead=lead)
+
+@portal.route("/crm")
+def crm():
+    elements = {"title": "CRM"}
+    return render_template("crm.html", elements=elements)
 
 @portal.route("/projects")
 def projects():

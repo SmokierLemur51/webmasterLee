@@ -19,14 +19,14 @@ from wtforms.validators import DataRequired
 
 
 class CreateLead(FlaskForm):
+    # hidden_field = HiddenField()
     company = StringField("Company")
     contact = StringField("Contact Name")
     phone = StringField("Phone")
     email = StringField("Email")
     contacted = BooleanField("Contacted")
     converted = BooleanField("Converted")
-    hidden_field = HiddenField()
-    l_submit = SubmitField("Submit")
+    submit = SubmitField("Submit")
 
 
 
