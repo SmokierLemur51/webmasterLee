@@ -16,6 +16,8 @@ from sqlalchemy.sql import func
 
 
 class Base(DeclarativeBase):
+    # using object inheritance, can i use this Base class to give all the 
+    # classes who inherit from it db columns for create, update, delete?
     pass
 
 
@@ -51,7 +53,7 @@ class Lead(Base):
     contacted_at: Mapped[datetime.datetime] = mapped_column(DateTime, nullable=True)
     comment: Mapped[str] = mapped_column(String(255), nullable=True)
 
-    discovery_method: Mapped[DiscoveryMethod] = relationship("DiscoveryMethod", back_populates="leads")
+    discovery_method: Mapped["DiscoveryMethod"] = relationship("DiscoveryMethod", back_populates="leads")
     notes: Mapped[List["LeadNote"]] = relationship(back_populates="lead")
 
 
@@ -107,8 +109,8 @@ class Project(Base):
     total_hours_worked: Mapped[float] = mapped_column(Float)
     total_price: Mapped[float] = mapped_column(Float)
 
-    status: Mapped[Status] = relationship(back_populates="projects")
-    client: Mapped[Client] = relationship(back_populates="projects")
+    status: Mapped["Status"] = relationship(back_populates="projects")
+    client: Mapped["Client"] = relationship(back_populates="projects")
     
     tickets: Mapped[List["Ticket"]] = relationship(back_populates="project")
     checklists: Mapped[List["ProjectChecklist"]] = relationship(back_populates="project")
@@ -118,11 +120,12 @@ class Project(Base):
 class ProjectChecklist(Base):
     __tablename__ = "project_checklists"
     id: Mapped[int] = mapped_column(primary_key=True)
-    project_id: Mapped[int] = mapped_column(ForeignKey("projects.id"), nullable=False)
+    project_id: Mapped[int] = mapped_column(ForeignKey("projects.id"))
     checklist_name: Mapped[str] = mapped_column(String(120), nullable=False)
     complete: Mapped[bool] = mapped_column(Boolean, default=False)
-
-    checklist_items: Mapped[List["ChecklistItems"]] = relationship(back_populates="checklist")
+    
+    project: Mapped["Project"] = relationship("Project", back_populates="checklists")
+    checklist_items: Mapped[List["ProjectChecklistItem"]] = relationship(back_populates="checklist")
 
 
 
@@ -131,10 +134,10 @@ class ProjectChecklistItem(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     checklist_id: Mapped[int] = mapped_column(ForeignKey("project_checklists.id"), nullable=False)
     item: Mapped[str] = mapped_column(String(100), nullable=False)
-    item_description: Mapped[str] = mapped_column(String(255), nullable=True) # displayed when hover over item name
+    item_description: Mapped[str] = mapped_column(String(255), nullable=True)
     complete: Mapped[bool] = mapped_column(Boolean, default=False)
     
-    checklist: Mapped[ProjectChecklist] = mapped_column("ProjectChecklist", back_populates="checklist")
+    checklist: Mapped["ProjectChecklist"] = relationship(back_populates="checklist_items")
 
 
 

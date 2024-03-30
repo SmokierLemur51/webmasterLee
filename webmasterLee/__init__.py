@@ -26,5 +26,11 @@ def create_app(config_class=Config):
     
     with app.app_context():
         db.metadata.create_all(db.engine)
-
+    """
+    from .tests.leads import discovery_methods, leads, populate_discovery_methods, populate_leads
+    
+    with app.app_context():
+        populate_discovery_methods(db, discovery_methods)
+        populate_leads(db, leads)   
+    """
     return app

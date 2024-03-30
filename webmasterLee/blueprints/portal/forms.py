@@ -1,7 +1,7 @@
 """
 File: blueprints/portal/forms.py
 
-WTF Forms for the administrative portal. 
+WTF Forms for the administrative portal.  
 
 Author: Logan Lee
 """
@@ -20,6 +20,7 @@ from wtforms.validators import DataRequired
 
 class CreateLead(FlaskForm):
     # hidden_field = HiddenField()
+    discovery_method = SelectField("Select Discovery Method")
     company = StringField("Company")
     contact = StringField("Contact Name")
     phone = StringField("Phone")

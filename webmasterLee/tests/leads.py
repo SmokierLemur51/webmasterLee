@@ -7,30 +7,30 @@ Author: Logan Lee
 
 Still need to go through phone for pictures of people on the road. 
 """
-from webmasterLee.models import Lead, LeadDiscoveryMethod
+from webmasterLee.models import Lead, DiscoveryMethod
 
 discovery_methods = [
-    LeadDiscoveryMethod(
+    DiscoveryMethod(
         method="Lansing Building Products", 
         method_description="Discovered from merch seen on people that came into Lansing."
     ),
-    LeadDiscoveryMethod(
+    DiscoveryMethod(
         method="Public Display",
         method_description="Car decals, business card bulletins, signs or other public display."
     ),
-    LeadDiscoveryMethod(
+    DiscoveryMethod(
         method="Family/Friend Referral",
         method_description="A family or friend referred them to me."
     ),
-    LeadDiscoveryMethod(
+    DiscoveryMethod(
         method="Client Referral",
         method_description="A client referred them to me."
     ),
-    LeadDiscoveryMethod(
+    DiscoveryMethod(
         method="Google Advertising",
         method_description="Found me through my google ads."
     ),
-    LeadDiscoveryMethod(
+    DiscoveryMethod(
         method="Facebook Advertising",
         method_description="Found me through my facebook ads."
     ),

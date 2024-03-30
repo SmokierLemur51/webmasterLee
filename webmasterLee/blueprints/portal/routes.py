@@ -12,7 +12,7 @@ Author: Logan Lee
 """
 from flask import Blueprint, redirect, render_template, url_for
 
-from ...models import db, Lead
+from ...models import db, DiscoveryMethod, Lead
 from .forms import CreateLead
 
 portal = Blueprint("portal", __name__, template_folder="portal_templates")
@@ -28,18 +28,28 @@ def home():
 
 
 
-@portal.route("/leads")
+@portal.route("/leads", methods=["GET", "POST"])
 def leads():
     """
     General overview of current leads. 
     """
     leads = db.session.query(Lead).all() # eventually want to filter by good leads
-    elements = {
-        "title": "Leads",
+    elements = {"title": "Leads"}
 
-    }
-    create_form = CreateLead()
-    return render_template("leads.html", elements=elements, leads=leads)
+    form = CreateLead() # still need to add discovery method
+    form.discovery_method.choices = db.Query(DiscoveryMethod).all()
+
+    if form.validate_on_submit():
+        new = Lead(
+            discovery_method_id=form.discovery_method.data,
+            company=form.company.data,
+            phone=form.phone.data,
+            email=form.email.data,
+            contacted=form.contacted.data,
+                
+            comment=form.comment.data,
+        )
+    return render_template("leads.html", elements=elements, leads=leads, form=form)
 
 
 
@@ -51,6 +61,17 @@ def view_lead(lead_id):
     lead = db.get_or_404(Lead, lead_id) 
     elements = {"title": lead.company}
     return render_template("lead.html", elements=elements, lead=lead)
+
+
+
+# This remains unused for now. 
+@portal.route("/leads/create")
+def create_lead():
+    form = CreateLead()
+    if form.validate_on_submit():
+        print(crea)
+        pass
+    return redirect(url_for("portal.leads"))
 
 
 
