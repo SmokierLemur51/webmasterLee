@@ -27,6 +27,7 @@ class CreateLead(FlaskForm):
     email = StringField("Email")
     contacted = BooleanField("Contacted")
     converted = BooleanField("Converted")
+    comment = TextAreaField("Comment")
     submit = SubmitField("Submit")
 
 

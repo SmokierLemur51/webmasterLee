@@ -40,98 +40,136 @@
   <!-- begin row -->
   <div class="row align-items-center">
       
-      
-      <div class="col">
-          <button class="btn btn-primary dropdown-toggle container-fluid" type="button" id="dropdownForm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             Create New Lead
-          </button>
-      
-          
-      </div>
-  </div>
-  <!-- end of row-->
-      
-  <div class="form-group">
-      <form method="POST" action="{{ url_for('portal.leads') }}">
-          {{ form.csrf_token }}
-          {{ form.hidden_tag() }}
-          <fieldset>
-              <legend class="border-bottom mb-4">{{ legend }}</legend>
-              <!-- company field -->
-              <div class="form-group">
-                  {{ form.company.label(class='form-control-label') }}
-                  {% if form.company.errors %}
-                      {% for error in form.company.errors %}
-                          <span>{{ error }}</span>
-                      {% endfor %}
-                  {% else %}
-                      {{ form.company(class='form-control form-control-lg') }}
-                  {% endif %}
-              </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createLead">
+      Create Lead
+    </button>
 
-              <!-- contact field -->
-              <div class="form-group">
-                  {{ form.contact.label(class='form-control-label') }}
-                  {% if form.contact.errors %}
-                      {% for error in form.contact.errors %}
-                          <span>{{ error }}</span>
-                      {% endfor %}
-                  {% else %}
-                      {{ form.contact(class='form-control form-control-lg') }}
-                  {% endif %}
-              </div>
-
-              <!-- phone field -->
-              <div class="form-group">
-                  {{ form.phone.label(class='form-control-label') }}
-                  {% if form.phone.errors %}
-                      {% for error in form.phone.errors %}
-                          <span>{{ error }}</span>
-                      {% endfor %}
-                  {% else %}
-                      {{ form.phone(class='form-control form-control-lg') }}
-                  {% endif %}
-              </div>
-
-              <!-- email field -->
-              <div class="form-group">
-                  {{ form.email.label(class='form-control-label') }}
-                  {% if form.email.errors %}
-                      {% for error in form.email.errors %}
-                          <span>{{ error }}</span>
-                      {% endfor %}
-                  {% else %}
-                      {{ form.email(class='form-control form-control-lg') }}
-                  {% endif %}
-              </div>
-              <div class="form-group">
-                {{ form.contacted.label(class='form-control-label') }}
-                {% if form.contacted.errors %}
-                    {% for error in form.contacted.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                {% else %}
-                    {{ form.contacted(class='form-control form-control-lg') }}
-                {% endif %}
-            </div>
+    <!-- Modal -->
+    <div class="modal fade" id="createLead" tabindex="-1" aria-labelledby="createLeadLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="createLeadLabel">Create Lead</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
             <div class="form-group">
-              {{ form.converted.label(class='form-control-label') }}
-              {% if form.converted.errors %}
-                  {% for error in form.converted.errors %}
-                      <span>{{ error }}</span>
-                  {% endfor %}
-              {% else %}
-                  {{ form.converted(class='form-control form-control-lg') }}
-              {% endif %}
-          </div>
+            <form method="POST" action="{{ url_for('portal.leads') }}">
+                {{ form.csrf_token }}
+                {{ form.hidden_tag() }}
+                <fieldset>
+                    <legend class="border-bottom mb-4">{{ legend }}</legend>
+                    
+                    <div class="form-group">
+                        {{ form.discovery_method.label(class='form-control-label') }}
+                        {% if form.discovery_method.errors %}
+                            {% for error in form.discovery_method.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.discovery_method(class='form-control form-control-lg') }}
+                        {% endif %}
+                    </div>
+                    <!-- company field -->
+                    <div class="form-group">
+                        {{ form.company.label(class='form-control-label') }}
+                        {% if form.company.errors %}
+                            {% for error in form.company.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.company(class='form-control form-control-lg') }}
+                        {% endif %}
+                    </div>
 
-          </fieldset>
-          <div>
-              {{ form.submit(class='btn btn-primary') }}
+                    <!-- contact field -->
+                    <div class="form-group">
+                        {{ form.contact.label(class='form-control-label') }}
+                        {% if form.contact.errors %}
+                            {% for error in form.contact.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.contact(class='form-control form-control-lg') }}
+                        {% endif %}
+                    </div>
+
+                    <!-- phone field -->
+                    <div class="form-group">
+                        {{ form.phone.label(class='form-control-label') }}
+                        {% if form.phone.errors %}
+                            {% for error in form.phone.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.phone(class='form-control form-control-lg') }}
+                        {% endif %}
+                    </div>
+
+                    <!-- email field -->
+                    <div class="form-group">
+                        {{ form.email.label(class='form-control-label') }}
+                        {% if form.email.errors %}
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.email(class='form-control form-control-lg') }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                      {{ form.contacted.label(class='form-control-label') }}
+                      {% if form.contacted.errors %}
+                          {% for error in form.contacted.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      {% else %}
+                          {{ form.contacted(class='form-control form-control-lg') }}
+                      {% endif %}
+                  </div>
+                  <div class="form-group">
+                    {{ form.converted.label(class='form-control-label') }}
+                    {% if form.converted.errors %}
+                        {% for error in form.converted.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.converted(class='form-control form-control-lg') }}
+                    {% endif %}
+                  </div>
+
+                  <div class="form-group">
+                    {{ form.comment.label(class='form-control-label') }}
+                    {% if form.comment.errors %}
+                        {% for error in form.comment.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.comment(class='form-control form-control-lg') }}
+                    {% endif %}
+                  </div>
+
+                </fieldset>
+                <div>
+                    {{ form.submit(class='btn btn-primary') }}
+                </div>
+              </form>
+            </div>
           </div>
-      </form>
-  </div>
-</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>      
+    <!-- end of create lead modal -->
+
+<br>
+<br>
+<br>
 
 <div class="container-md">
   <div class="card container-fluid" style="width: 18rem;">
