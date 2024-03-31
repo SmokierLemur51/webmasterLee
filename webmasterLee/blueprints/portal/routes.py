@@ -10,7 +10,7 @@ Formatting:
 
 Author: Logan Lee
 """
-from flask import Blueprint, redirect, render_template, url_for
+from flask import Blueprint, current_app, redirect, render_template, url_for
 
 from ...models import db, DiscoveryMethod, Lead
 from .forms import CreateLead

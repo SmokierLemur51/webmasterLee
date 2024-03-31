@@ -60,7 +60,7 @@
                 {{ form.hidden_tag() }}
                 <fieldset>
                     <legend class="border-bottom mb-4">{{ legend }}</legend>
-                    
+                    <!-- discovery method -->
                     <div class="form-group">
                         {{ form.discovery_method.label(class='form-control-label') }}
                         {% if form.discovery_method.errors %}
@@ -171,18 +171,58 @@
 <br>
 <br>
 
-<div class="container-md">
-  <div class="card container-fluid" style="width: 18rem;">
-      <div class="card-header">
-        Leads
-      </div>
-      <ul class="list-group list-group-flush">
-        {% for l in leads %}
-          <li class="list-group-item">{{ l.company }}</li>
-        {% endfor %}
-      </ul>
+<div class="container-lg" >
+    <div class="card">
+        <div class="card-header">
+        Current Leads
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Current list of leads, </h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+            <div class="col-lg">
+                {% for lead in leads %}
+                <div class="row container-fluid justify-content-center mt-4">
+                    <div class="card" style="width: 50%;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ lead.company }}</h5>
+                            {% if lead.phone %}
+                              <h6 class="card-subtitle mb-2 text-body-secondary">** {{ lead.phone[0:3] }}-{{ lead.phone[3:6] }}-{{ lead.phone[6:] }} **</h6>
+                            {% endif %}
+                            {% if lead.email %}
+                              <h6 class="card-subtitle mb-2 text-body-secondary">** {{ lead.email }} **</h6>
+                            {% endif %}
+                            {% if lead.comment %}
+                              <p class="card-text">{{ lead.comment }}</p>
+                            {% endif %}
+                            <!-- dropdown here for all lead notes -->
+                            <a href="#" class="card-link">Add Note to Lead</a>
+                            <a href="#" class="card-link">Convert to Client</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
     </div>
 </div>
 
 <!-- end of main block -->
 {% endblock main %}
+
+{% block footer %}
+
+{% if elements["company"] %}
+  <footer class="footer">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <p>&copy; 2024 {{ elements["company"] }}. All rights reserved.</p>
+              </div>
+          </div>
+      </div>
+  </footer>
+{% endif %}
+
+{% endblock footer %}

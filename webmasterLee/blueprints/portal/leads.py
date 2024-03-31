@@ -9,11 +9,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 from ...models import db, Client, Lead
 
+
 def get_method_id(method: str, method_list: list) -> int:
+    # i think you can delete this
     for m in method_list:
         if m[1] == method:
             return m[0]
-    
+
 
 def convert_lead_client(db: SQLAlchemy, lead: Lead) -> Client:
     """
