@@ -82,6 +82,17 @@ class Client(Base):
     created_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=func.now())
 
     projects: Mapped[List["Project"]] = relationship(back_populates="client")
+    notes: Mapped[List["ClientNote"]] = relationship(back_populates="client")
+
+
+class ClientNote(Base):
+    __tablename__ = "client_notes"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    client_id: Mapped[int] = mapped_column(ForeignKey("clients.id"), nullable=False)
+    title: Mapped[str] = mapped_column(String(120))
+    note: Mapped[str] = mapped_column(String(500), nullable=True)
+
+    client: Mapped["Client"] = relationship("Client", back_populates="notes")
 
 
 

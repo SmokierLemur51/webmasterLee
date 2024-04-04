@@ -30,11 +30,17 @@ class CreateLead(FlaskForm):
     comment = TextAreaField("Comment")
     submit = SubmitField("Submit")
 
-
-
 class UpdateLead(FlaskForm):
+    # hidden field lead pk
     pass
 
+class CreateLeadNote(FlaskForm):
+    # hidden field lead  pk
+    pass
+
+class UpdateLeadNote(FlaskForm):
+    # hidden field lead note pk
+    pass
 
 
 class CreateClient(FlaskForm):
@@ -47,6 +53,12 @@ class CreateClient(FlaskForm):
 
 
 class UpdateClient(FlaskForm):
+    pass
+
+class CreateClientNote(FlaskForm):
+    pass
+
+class UpdateClientNote(FlaskForm):
     pass
 
 

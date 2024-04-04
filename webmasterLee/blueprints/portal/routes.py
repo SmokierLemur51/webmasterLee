@@ -12,28 +12,35 @@ Author: Logan Lee
 """
 from flask import Blueprint, current_app, redirect, render_template, url_for
 
-from ...models import db, DiscoveryMethod, Lead
-from .forms import CreateLead
-from .leads import get_method_id
+from ...models import (
+    db, 
+    DiscoveryMethod, Lead,
+    Client, ClientNote
+    Project, ProjectChecklist, ProjectChecklistItem,
+)
+from .forms import (CreateLead)
 
+
+# Define our portal blueprint object.
 portal = Blueprint("portal", __name__, template_folder="portal_templates")
 
+
+"""
+Homepage to contain general information. One thing that I want to see
+is the schedule, contact requests, and project deadlines.
+"""
 @portal.route("/")
 def home():
-    """
-    Homepage to contain general information. One thing that I want to see
-    is the schedule, contact requests, and project deadlines.
-    """
     elements = {"title": "Portal Home"}
     return render_template("home.html", elements=elements)
 
 
 
+"""
+General overview of current leads. 
+"""
 @portal.route("/leads", methods=["GET", "POST"])
 def leads():
-    """
-    General overview of current leads. 
-    """
     # page data
     leads = db.session.query(Lead).all() # need to paginate results
     discovery_method_list = [[self.id, self.method] for self in db.session.query(DiscoveryMethod).all()] 
@@ -55,37 +62,62 @@ def leads():
         with current_app.app_context():
             db.session.add(new)
             db.session.commit()
-            print(new.company)
+            flash(f"Added {new.company} to leads.")
     return render_template("leads.html", elements=elements, leads=leads, form=form)
 
 
 
+"""
+View specific lead. Contains options for creating notes, updating, or deleting.
+"""
 @portal.route("/leads/<int:pk>")
 def view_lead(pk):
-    """
-    View specific lead. Contains options for creating notes, updating, or deleting.
-    """
     lead = db.get_or_404(Lead, pk) 
     elements = {"title": lead.company}
     return render_template("lead.html", elements=elements, lead=lead)
 
 
 
-# This remains unused for now. 
-@portal.route("/leads/create")
-def create_lead():
-    form = CreateLead()
-    if form.validate_on_submit():
-        print(crea)
-        pass
-    return redirect(url_for("portal.leads"))
+
+@portal.route("leads/<int:pk>/notes/create")
+def create_lead_note(pk):
+    # note that pk is passed into url_for
+    return redirect(url_for("leads.notes", pk=pk))
 
 
 
+"""
+power_hour
+
+Generate a call sheet to run through when I am wanting to create a 
+larger workload. 
+
+Each time you load this page it will display a list of random leads, and 
+the scrapers might even grab some more. 
+"""
+@portal.route("/leads/power-hour")
+def power_hour():
+    elements = {"title": "Power Hour"}
+    return render_template("power_hour.html", elements=elements)
+
+
+
+"""
+crm 
+
+Landing page for managing customers, this might be best suited in 
+its own blueprint to be totally honest. 
+
+General rundown of what is going on with my clients. Upcoming meetings,
+bills, and project deadlines. 
+
+API to my email that will track recent chains we had over projects.
+"""
 @portal.route("/crm")
 def crm():
+    clients = db.session.query(Client).all()
     elements = {"title": "CRM"}
-    return render_template("crm.html", elements=elements)
+    return render_template("crm.html", elements=elements, clients=clients)
 
 
 
