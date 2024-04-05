@@ -1,8 +1,0 @@
-Flask 
-Flask-SQLAlchemy
-Flask-Bcrypt
-Flask-WTForms -- switching to marshmallow
-
-
-~~ API ~~
-	 
