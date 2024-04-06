@@ -7,7 +7,10 @@ class DiscoveryMethod(models.Model):
 
 
 class ContactInformation(models.Model):
-	pass
+	first_name = models.CharField(max_length=60)
+    last_name = models.CharField(max_length=60)
+    phone = models.CharField(max_length=10)
+    email = models.CharField(max_length=120)
 
 
 class Lead(models.Model):
@@ -20,6 +23,7 @@ class Lead(models.Model):
 	google = models.BooleanField()
 	contacted = models.BooleanField()
 	converted = models.BooleanField()
+	comment = models.TextField()
 
 
 class LeadNote(models.Model):
@@ -30,17 +34,22 @@ class LeadNote(models.Model):
 
 class Client(models.Model):
 	discovery_method = models.ForeignKey(DiscoveryMethod, on_delete=models.CASCADE)
-	company = models.CharField(80)
-
+	main_contact = models.ForeignKey(ContactInformation, on_delete=models.CASCADE)
+    all_contacts = models.ManyToMany
+    company = models.CharField(80)
+    
+    
 
 class ClientNote(models.Model):
-	pass
-
+	client = models.ForeignKey(Client, on_delete=models.CASCADE)
+	title = models.CharField(120)
+	note = models.TextField()
 
 class ServiceOffer(models.Model):
 	"""
 	Services I offer, with prices attached.
 	"""
+	pass
 
 
 class Proposal(models.Model):
