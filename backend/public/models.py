@@ -11,7 +11,8 @@ class StatusCode(models.Model):
 
 
 class ContactRequest(models.Model):
-    created_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, )
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=12)
     email = models.EmailField(max_length=120)
