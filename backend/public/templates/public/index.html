@@ -1,4 +1,5 @@
 {% extends 'public/base.html' %}
+{% load static }
 
 {% block navbar %}
 <!-- top navbar start -->
@@ -26,6 +27,11 @@
 {% endblock navbar %}
 
 {% block main %}
+<div class="row">
+  <img src="{% static 'public/img/purple_blue_black_space_half.jpg' %}" alt="">
+</div>
+
+
 <div class="container-lg">
   <div class="card">
       <div class="card-header oswald-300">Our Mission</div>
@@ -40,10 +46,6 @@
           </div>
       </div>
   </div>  
-</div>
-
-<div class="d-flex justify-content-center mt-4">
-  <button class="btn btn-primary signature-color-button" style="width: 70%; height: 75px;">Picture here</button>
 </div>
 
 

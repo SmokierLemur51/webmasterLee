@@ -31,3 +31,6 @@ class PortfolioProject(models.Model):
     codename = models.CharField(max_length=120)
     url = models.URLField(max_length=500)
     about = models.TextField()
+
+
+
